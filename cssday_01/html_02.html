@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .out {
+            /* width: 800px; */
+            position: relative;
+            width: 200px;
+            background-color: aqua;
+            
+        }
+        .inner_one,.inner_two,.inner_three {
+            /* display: inline-block; */
+            width: 240px;
+            margin-right: 30px;
+            text-align: center;
+        } 
+        img {
+            width: 120px;
+            height: 120px;
+            vertical-align: middle;
+        }
+        .inner {
+            position: absolute;
+            left: 200px;
+            top: 0;
+            background: #ccc;
+            display: flex;
+            flex-wrap: wrap;
+            
+        }
+        .inner div {
+            /* flex: 1; */
+            float: left;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="out">
+        点击我
+        <div class="inner">
+            <div class="inner_one">
+                <img src="./images/figure1.jpg" alt="">
+                <span>我的</span>
+            </div>
+            <div class="inner_two">
+                <img src="./images/figure2.jpg" alt="">
+                <span>你的</span>
+            </div>
+            <div class="inner_one">
+                <img src="./images/figure1.jpg" alt="">
+                <span>我的</span>
+            </div>
+            <div class="inner_two">
+                <img src="./images/figure2.jpg" alt="">
+                <span>你的</span>
+            </div>
+            <div class="inner_one">
+                <img src="./images/figure1.jpg" alt="">
+                <span>我的</span>
+            </div>
+            <div class="inner_two">
+                <img src="./images/figure2.jpg" alt="">
+                <span>你的</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

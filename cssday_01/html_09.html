@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>放大镜</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 430px;
+            height: 430px;
+            border: 1px solid #dddddd;
+            position: relative;
+            margin: 50px;
+        }
+        .small_box {
+            width: 430px;
+            height: 430px;
+            position: relative;
+            
+        }
+        .small_box img {
+           width: 430px;
+           height: 430px;
+        }
+        .small_box #mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 210px;
+            height: 210px;
+            background: rgba(255, 0, 0, 0.3);
+            display: none;
+        }
+        .big_box {
+            position: absolute;
+            left: 440px;
+            top: 0;
+            width: 430px;
+            height: 430px;
+            border: 1px solid #dddddd;
+            overflow: hidden;
+            display: none;
+        }
+        .big_box img {
+            position: absolute;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="small_box" id="small_box">
+            <img src="https://scpic.chinaz.net/files/pic/pic9/202011/apic29270.jpg" alt="">
+            <span id="mask"></span>
+        </div>
+        <div class="big_box" id="big_box">
+            <img src="https://scpic.chinaz.net/files/pic/pic9/202011/apic29270.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            // 1.获取需要的标签
+            var box = document.getElementById('box');
+            var small_box = box.children[0]; //小盒子
+            var big_box = box.children[1];
+            var small_img = small_box.children[0];
+            var mask = document.getElementById('mask') //遮罩层
+            var big_img = big_box.children[0];
+
+            // 2.监听鼠标在小盒子上的移动
+            small_box.onmouseover = function() { //鼠标进入
+                // 2.1 鼠标移入时让盒子显示出来
+                mask.style.display = 'block';
+                big_box.style.display = 'block';
+                // 2.2 鼠标移动时
+                small_box.onmousemove = function(e) {
+                    e = e || window.event;
+                    // console.log(e.clientX);
+                    // 求出当前鼠标坐标,然后求出遮罩层移动的距离
+                    // console.log(small_img.offsetLeft);
+                    // console.log(mask.offsetWidth);
+                    console.log(big_img.offsetWidth);
+                    var moveX = e.clientX - small_box.offsetLeft - mask.offsetWidth*0.5;
+                    var moveY = e.clientY - small_box.offsetTop - mask.offsetHeight*0.5;
+
+                    // 2.3边界处理
+                    if (moveX < 0) {
+                        moveX = 0;
+                    } else if(moveX >= small_box.offsetWidth - mask.offsetWidth) {
+                        moveX = small_box.offsetWidth - mask.offsetWidth;
+                    }
+                    
+                    if (moveY < 0) {
+                        moveY = 0;
+                    } else if (moveY >= small_box.offsetHeight - mask.offsetHeight) {
+                        moveY = small_box.offsetHeight - mask.offsetHeight;
+                    }
+                    // 遮罩层移动
+                    mask.style.left = moveX + 'px';
+                    mask.style.top = moveY + 'px';
+
+                    // 让大图移动起来
+                    // 公式： moveX / 大图的移动距离 === (small.box宽度 - mask宽度) / (big_img图片的宽度 - big_box宽度)
+                    var x = moveX / (small_box.offsetWidth - mask.offsetWidth);
+                    var y = moveY / (big_img.offsetWidth - big_box.offsetWidth);
+                    console.log("x:"+ x + "y:" + y);
+                    big_img.style.left = -x * (big_img.offsetWidth - big_box.offsetWidth) + 'px';
+                    big_img.style.top = -y * (big_img.offsetHeight - big_box.offsetHeight) + 'px';
+                }
+            }
+            small_box.onmouseout = function () {
+                mask.style.display = 'none';
+                big_box.style.display = 'none';
+            } 
+        }
+        
+    </script>
+</body>
+</html>

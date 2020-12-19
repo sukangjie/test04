@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            
+            padding: 0;
+        }
+        .container {
+            width: 100%;    
+        }
+        .box {
+            display: flex;
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+        }
+        .le {
+            width: 200px;
+            background-color: black;
+        }
+        .rt {
+            width: 200px;
+            background-color: red;
+        }
+        .top_list{
+            background-color: #ccc;
+            margin: 0;
+            padding: 0 20px;
+            list-style: none;
+            flex: 1;
+            /* margin: 0 20px; */
+            display: flex;
+            justify-content: space-between;
+        }
+        .top_list a {
+            display: inline-block;
+        }
+        .top_list a:hover {
+         color: #fff;
+        }
+        .list_table {
+            /* height: 300px; */
+            height: 0;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            visibility: hidden;
+            transition: height .1s;
+            box-shadow: 2px 2px 2px #ccc, -2px 2px 2px #ccc;
+        }
+        .list_item {
+            height: 300px;
+            width: 20%;
+            text-align: center;
+            
+        }
+        .list_item img {
+            height: 200px;
+            width: 100%;
+           
+        }
+        .list_item p {
+            color: orangered;
+            
+        }
+        .list_li:hover .list_table {
+            height: 300px;
+            visibility: visible;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="le"></div>
+            <div class="top_list">
+                <a class="list_li">手机
+                    <ul class="list_table">
+                        <li class="list_item">
+                            <img src="./images/figure1.jpg" alt="">
+                            <p>shuoji</p>
+                        </li>
+                        <li class="list_item">
+                            <img src="./images/figure1.jpg" alt="">
+                            <p>shuoji</p>
+                        </li>
+                        <li class="list_item">
+                            <img src="./images/figure1.jpg" alt="">
+                            <p>shuoji</p>
+                        </li>
+                        <li class="list_item">
+                            <img src="./images/figure1.jpg" alt="">
+                            <p>shuoji</p>
+                        </li>
+                        <li class="list_item">
+                            <img src="./images/figure1.jpg" alt="">
+                            <p>shuoji</p>
+                        </li>
+                    </ul>
+                </a>
+                <a class="list_li">电脑
+                    <ul class="list_table">
+                        <li class="list_item">
+                            <img src="./images/figure1.jpg" alt="">
+                            <p>shuoji</p>
+                        </li>
+                        <li class="list_item">
+                            <img src="./images/figure1.jpg" alt="">
+                            <p>shuoji</p>
+                        </li>
+                        <li class="list_item">
+                            <img src="./images/figure1.jpg" alt="">
+                            <p>shuoji</p>
+                        </li>
+                    </ul>
+                </a>
+                <a>鼠标</a>
+                <a>书桌</a>
+                <a>鞋子</a>
+            </div>
+            <div class="rt"> </div>
+        </div>
+    </div>
+</body>
+</html>

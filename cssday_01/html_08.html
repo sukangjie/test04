@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品详情页</title>
+    <style>
+        .container {
+            width: 100%;
+            height: 600px;
+            display: flex;
+        }
+        .imglf {
+            width: 50%;
+            position: relative;
+        }
+        .imglf>.bigImg{
+            width: 560px;
+            height: 560px;
+            border: 1px solid #cccccc;
+        }
+        .bigImg> img {
+            width: 100%;
+            height: 100%;
+        }
+        .smallImg {
+            width: 100%;
+        }
+        .smallImg ul {
+            width: 100%;
+            display: flex;
+            
+            justify-content: space-around;
+            list-style: none;
+            /* margin: 0; */
+            padding: 0;
+            
+        }
+        .smallImg>ul>li {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #333333;
+            transform: scale(0.8);
+            transition: all .2s;
+        }
+        .smallImg>ul>li:hover {
+            border-color: orange;
+            transform: scale(1);
+        }
+        .smallImg>ul>li img {
+            width: 100%;
+            height: 100%;
+        }
+        .contentRh {
+            margin-left: 30px;
+        }
+        .text span {
+            font-size: 15px;
+
+        }
+        .desc {
+            color: orange;
+        }
+        .text span:nth-child(2) {
+            color: #cccccc;
+        }
+        .button {
+            margin-top: 460px;
+        }
+        .lfButton,.rhButton {
+            display: inline-block;
+            margin-left: 80px;
+            width: 200px;
+            height: 60px;
+            background-color: red;
+            color: #ffffff;
+            text-align: center;
+            line-height: 60px;
+        }
+        .big_box {
+            position: absolute;
+            left: 570px;
+            top: 200px;
+            width: 300px;
+            height: 300px;
+            display: none;
+            border: 1px solid #eeeeee;
+            overflow: hidden;
+            z-index: 9;
+        }
+        .big_box img {
+            position: absolute;
+            z-index: 9;
+        }
+        .bigImg:hover+.big_box {
+            display: block;
+        }
+        .mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 210px;
+            height: 210px;
+            background: rgba(255, 0, 0, 0.3);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="imglf">
+            <div class="bigImg" id="small_box">
+                <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1606288561.52572408.jpg" alt="">
+                <span class="mask" id="mask"></span>
+            </div>
+            <div class="big_box" id="big_box">
+                <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1606288561.52572408.jpg" alt="">
+            </div>
+            <div class="smallImg">
+                <ul>
+                    <li>
+                        <img src="./images/figure1.jpg" alt="">
+                    </li>
+                    <li>
+                        <img src="./images/figure2.jpg" alt="">
+                    </li>
+                    <li>
+                        <img src="./images/figure3.jpg" alt="">
+                    </li>
+                    <li>
+                        <img src="./images/figure5.jpg" alt="">
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="contentRh">
+            <h2>Note 9 Pro 5G</h2>
+            <p class="text">
+                <span class="desc">
+                    「购机赠价值798元双人定制体检卡；得2倍米金；+1元得200G云空间月卡；购机抽奖赢70英寸电视」
+                </span>
+                <span>
+                    一亿像素夜景相机 / 120Hz六档变速高刷屏 / 国内首发骁龙750G / 6.67"小孔径全面屏 / 立体声双扬声器 / 4820mAh+33W闪充 / 多功能NFC / 线性马达 / 红外遥控 / 全新MIUI 12系统
+                </span>
+            </p>
+            <div class="button">
+                <div class="lfButton">立即购买</div>
+                <div class="rhButton">加入购物车</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            //1.先获取到所需要的标签
+            var small_box = document.getElementById('small_box');
+            var big_box = document.getElementById('big_box');
+            var mask = document.getElementById('mask');
+            var small_img = small_box.children[0];
+            var big_img = big_box.children[0];
+
+            // 2.监听鼠标进入小盒子的时候
+            small_box.onmouseover = function() {
+                mask.style.display = 'block';
+                big_box.style.display = 'block';
+                small_box.onmousemove = function(e) {
+                    e = e || window.event;
+                    // console.log(e.clientX); //鼠标进入时的坐标位置
+                    // 求出当前鼠标坐标,然后求出遮罩层移动的距离
+                    // console.log(small_img.offsetLeft);
+                    // console.log(mask.offsetWidth);
+                    var moveX = e.clientX - small_box.offsetLeft - mask.offsetWidth*0.5;
+                    var moveY = e.clientY - small_box.offsetTop - mask.offsetHeight*0.5;
+                    console.log(moveX);
+                     // 2.3边界处理
+                     if (moveX < 0) { //不让遮罩层出去
+                        moveX = 0;
+                    } else if(moveX >= small_box.offsetWidth - mask.offsetWidth) {
+                        moveX = small_box.offsetWidth - mask.offsetWidth;
+                    }
+                    
+                    if (moveY < 0) {
+                        moveY = 0;
+                    } else if (moveY >= small_box.offsetHeight - mask.offsetHeight) {
+                        moveY = small_box.offsetHeight - mask.offsetHeight;
+                    }
+                    // 遮罩层移动
+                    mask.style.left = moveX + 'px';
+                    mask.style.top = moveY + 'px';
+
+                    // 让大图移动起来
+                    // 公式： moveX / 大图的移动距离 === (small.box宽度 - mask宽度) / (big_img图片的宽度 - big_box宽度)
+
+                    var x = moveX / (small_box.offsetWidth - mask.offsetWidth);
+                    var y = moveY / (big_img.offsetWidth - big_box.offsetWidth);
+                    console.log(x , y);
+
+                    big_img.style.left = -x * (big_img.offsetWidth - big_box.offsetWidth) + 'px';
+                    big_img.style.top = -y * (big_img.offsetHeight - big_box.offsetHeight) + 'px';
+
+
+                }
+            }
+            small_box.onmouseout = function () { //鼠标离开小盒子的时候，让遮罩层和大盒子消失
+                mask.style.display = 'none';
+                big_box.style.display = 'none';
+            } 
+        }
+    </script>
+</body>
+</html>

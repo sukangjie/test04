@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            
+        }
+        body {
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* .imgshow {
+            margin-top: 50px !important;
+            width:400px;
+            height: 400px;
+            line-height: 400px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 0 8px #808080;
+            transform: scale(0.6);
+            transition: all .2s;
+        }
+        .imgshow:hover {
+            transform: scale(0.7);
+        } */
+        .trans {
+           height: 100px;
+           width: 100px;
+           text-align: center;
+           line-height: 100px;
+           /* border: 1px solid #ccc; */
+        }
+        .box {
+            position: relative;
+            display: block;
+            height: 100px;
+            width: 100px;
+            overflow: hidden;
+            /* border: 1px solid red; */
+        }
+        .box:hover::before {
+            transform: translate3d(100px, 0, 0);
+        }
+        .box:hover::after{
+            transform: translate3d(100px, 0, 0);
+        }
+        .box::before {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            left: 0;
+            background: url(./images/logo.png) no-repeat 50% 50%;
+            background-size: cover;
+            z-index: 2;
+            height: 100px;
+            width: 100px;
+            transition: all .2s;
+
+        }
+        .box::after {
+            content: '';
+            position: absolute;
+            display: inline-block;;
+            background: url(./images/logo_home.png) no-repeat 50% 50%;
+            top: 0;
+            background-size: cover;
+            left: -100px;
+            height: 100px;
+            width: 100px;
+            transition: all .2s;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="imgshow">
+        <img src="./images/figure8.jpg" alt="">
+    </div> -->
+    <div class="trans">
+        <a class="box">
+            搜索
+        </a>
+    </div>
+</body>
+</html>
